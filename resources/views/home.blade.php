@@ -66,6 +66,9 @@
                                     <button class="btn btn-danger btn-sm" type="button" @click="deleteTodo($event,t)">
                                         Delete
                                     </button>
+                                    <button class="btn btn-info btn-sm" type="button" @click="shareTodo($event,t)">
+                                        Share
+                                    </button>
                                 </td>
 
                             </tr>

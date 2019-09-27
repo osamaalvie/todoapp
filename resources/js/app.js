@@ -62,15 +62,28 @@ const app = new Vue({
                 config: {headers: {'Content-Type': 'multipart/form-data'}}
             })
                 .then(function (response) {
+
+                    $.toast({
+                        heading: 'Success',
+                        text: 'Todo successfully added.',
+                        showHideTransition: 'slide',
+                        icon: 'success'
+                    });
+
                     //handle success
-                    console.log(response);
                     todo.id = response.data.id;
                     app.todos.push(todo);
                     app.resetForm();
                 })
                 .catch(function (response) {
                     //handle error
-                    console.log(response)
+
+                    $.toast({
+                        heading: 'Error',
+                        text: 'error while saving!',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    })
                 });
         },
         getAllTodos: function () {
@@ -96,8 +109,7 @@ const app = new Vue({
         saveChanges: function (event, todo) {
 
             if (this.isChanged) {
-                console.log(todo);
-                console.log(event.target);
+
 
                 axios({
                     method: 'PUT',
@@ -107,12 +119,23 @@ const app = new Vue({
                 })
                     .then(function (response) {
                         //handle success
-                        console.log(response);
+                        $.toast({
+                            heading: 'Success',
+                            text: 'save successfully.',
+                            showHideTransition: 'slide',
+                            icon: 'success'
+                        });
+
 
                     })
                     .catch(function (response) {
                         //handle error
-                        console.log(response)
+                        $.toast({
+                            heading: 'Error',
+                            text: 'error while saving!',
+                            showHideTransition: 'fade',
+                            icon: 'error'
+                        })
                     });
             }
 

@@ -12,4 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css');
+
+mix.js('node_modules/toast/src/jquery.toast.js', 'public/js')
+    .copy('node_modules/toast/src/jquery.toast.css', 'public/css');
