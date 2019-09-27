@@ -29,4 +29,14 @@ class ToDo extends Model
         'name',
         'done',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function sharedUsers()
+    {
+        return $this->belongsToMany(User::class, 'sharedtodos');
+    }
 }

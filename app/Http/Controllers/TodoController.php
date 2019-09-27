@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\ToDo;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -101,6 +102,19 @@ class TodoController extends Controller
     public function getAllTodos()
     {
         return Auth::user()->todos;
+    }
+
+    public function allUsers()
+    {
+
+        return User::query()->with('sharedTodos')
+            ->where('users.id', '!=', Auth::user()->id)
+            ->get();
+    }
+
+    public function shareTodo(Request $request)
+    {
+        dd($request->all());
     }
 
 

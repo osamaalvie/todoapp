@@ -79,6 +79,7 @@
             </div>
         </div>
     </div>
+    @include('userShareModal')
 @endsection
 @push('styles')
     <style>

@@ -24,6 +24,11 @@ Route::get('all', 'TodoController@getAllTodos')->name('all');
 Route::post('store', 'TodoController@store')->name('store');
 Route::put('save', 'TodoController@update')->name('save');
 Route::delete('delete', 'TodoController@destroy')->name('delete');
+Route::get('allUsers', 'TodoController@allUsers')->name('allUsers');
+Route::post('shareTodo', 'TodoController@shareTodo')->name('shareTodo');
+
+
+
 
 
 

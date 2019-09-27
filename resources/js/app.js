@@ -35,7 +35,7 @@ const app = new Vue({
             name: '',
             done: false
         },
-
+        sharedUsers: [],
         todos: [],
         isChanged: false
     },
@@ -150,13 +150,58 @@ const app = new Vue({
             })
                 .then(function (response) {
                     //handle success
-                    console.log(response);
                     app.todos.splice(app.todos.indexOf(todo), 1)
 
                 })
                 .catch(function (response) {
                     //handle error
-                    console.log(response)
+                });
+        },
+        shareTodo: function (event, todo) {
+            console.log(todo);
+            axios.get('/allUsers')
+                .then(function (response) {
+                    var users = response.data;
+                    let userShareModal = $("#userShareModal");
+                    let table = userShareModal.find("#userTable");
+                    let body = table.find("tbody");
+                    body.empty();
+                    $.each(users, function (k, user) {
+                        var isShared = false;
+                        $.each(user.shared_todos, function (ki, vi) {
+
+                            if (todo.id === vi.id) {
+                                isShared = true;
+                            }
+                        });
+
+                        var checked = isShared ? 'checked' : '';
+                        let html = "<tr>" +
+                            "<td>" + user.name + "</td>" +
+                            "<td><input type='checkbox' name='user' value='" + user.id + "' " + checked + " @click='pushUsers($event," + todo + "," + user + ")'></td>" +
+                            "</tr>";
+                        body.append(html);
+                    });
+
+
+                    userShareModal.modal();
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+
+        },
+        pushUsers: function (event, todo, user) {
+
+            axios.get('/shareTodo')
+                .then(function (response) {
+
+
+                })
+                .catch(function (error) {
+                    console.log(error);
                 });
         }
     },
